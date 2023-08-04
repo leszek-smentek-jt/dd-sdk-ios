@@ -105,6 +105,11 @@ open class DatadogURLSessionDelegate: NSObject, URLSessionDataDelegate {
         // NOTE: This delegate method is only called for `URLSessionTasks` created without the completion handler.
         interceptor?.task(task, didCompleteWithError: error)
     }
+  
+    @available(iOS 16.0, *)
+    open func urlSession(_ session: URLSession, didCreateTask task: URLSessionTask) {
+      interceptor?.feature.intercept(task: task, additionalFirstPartyHosts: nil)
+    }
 }
 
 extension DatadogURLSessionDelegate: __URLSessionDelegateProviding {
