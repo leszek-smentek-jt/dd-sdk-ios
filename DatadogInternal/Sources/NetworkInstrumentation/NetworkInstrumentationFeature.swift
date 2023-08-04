@@ -117,6 +117,11 @@ extension NetworkInstrumentationFeature {
             interception.register(
                 metrics: ResourceMetrics(taskMetrics: metrics)
             )
+          
+            interception.register(
+                response: task.response,
+                error: nil
+            )
 
             if interception.isDone {
                 self.finish(task: task, interception: interception)
